@@ -1,0 +1,54 @@
+<div class="container-fluid calc">
+  <h1 class="text-left">
+    Currency Conversion Calculator
+  </h1>
+  <br><br>
+  <div class="row">
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-11">
+      <div class="container">
+            <!--<mat-progress-bar mode="indeterminate" *ngIf="change"></mat-progress-bar>-->
+            <h1 class="result primary" *ngIf="toRates != 0" 
+            style="font-size:70px"
+            [@resultAnimation]='state'
+            >{{ toRates | currency:to_base | spacer }}</h1>
+      </div> 
+      <hr *ngIf="toRates != 0">
+      <br>
+      <br>
+      <div class="container">
+        <form (ngSubmit)="caclValue(f3)" #f3="ngForm">
+            <div class="row">
+              <label class="primary" for="from">FROM: </label>
+                <mat-form-field>
+                  <mat-select placeholder="Select Base Currency" name="from_base" ngModel required>
+                    <mat-option *ngFor="let code of iso_codes" [value]="code">
+                      {{ code }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <label class="primary" for="to"> TO:</label>
+                <mat-form-field >
+                    <mat-select placeholder="Select Base Currency" 
+                    name="to_base" ngModel required>
+                      <mat-option *ngFor="let code of iso_codes" [value]="code">
+                        {{ code }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Value" 
+                    value="" ngModel name="value" required>
+                </mat-form-field>
+              </div> 
+              <p class="info-box" *ngIf="validator">* From Base and To Base can't be same</p>
+              <button type="submit" mat-raised-button color="primary" 
+              [disabled]="!f3.valid">Convert</button>  
+        </form>
+    </div>
+    </div>
+  </div>
+</div>

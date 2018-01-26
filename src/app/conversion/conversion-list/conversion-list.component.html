@@ -1,0 +1,92 @@
+<mat-tab-group class="demo-tab-group">
+    <mat-tab label="Today">
+      <div class="demo-tab-content">
+        <div class="container">
+          <form (ngSubmit)="todayBase(f1)" #f1="ngForm">
+            <mat-form-field >
+                <mat-select placeholder="Select Base Currency" name="base" ngModel required>
+                  <mat-option *ngFor="let code of iso_codes" [value]="code">
+                    {{ code }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            <button type="submit" mat-raised-button color="primary" [disabled]="!f1.valid">Submit</button>
+          </form>
+        </div>
+        <div class="container">
+          <h3>Base ISO Code: <span class="primary">{{ base }}</span></h3>
+        </div>
+        <div class="container currency-table">         
+              <table class="mytable">
+                <thead>
+                  <tr>
+                    <th class="primary">ISO CODE</th>
+                    <th class="primary">VALUE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let code of iso_codes;let i=index">
+                      <td *ngIf="code != base">{{ code }}</td>
+                      <td *ngIf="code != base">{{ rates[code] |currency:code | spacer }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Date">
+          <ng-template mat-tab-label>
+              <i class="material-icons">date_range</i>
+            </ng-template>
+          <div class="demo-tab-content">
+            <form (ngSubmit)="dateBase(f2)" #f2="ngForm">
+                <mat-form-field >
+                    <mat-select placeholder="Select Base Currency" name="base" ngModel required>
+                      <mat-option *ngFor="let code of iso_codes" [value]="code">
+                        {{ code }}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <input matInput
+                 [matDatepicker]="picker" 
+                 placeholder="Choose a date"
+                 [max]="date"
+                 name="date"
+                 ngModel
+                 required
+                 >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!f2.valid">Submit</button>
+              </form>
+              <div *ngIf="dateFlag; else infomsg">
+                  <div class="container">
+                      <h3>Base ISO Code: <span class="primary">{{ dateBaseValue }}</span></h3>
+                  </div>
+                  <div class="container currency-table">         
+                      <table class="mytable">
+                        <thead>
+                          <tr>
+                            <th class="primary">ISO CODE</th>
+                            <th class="primary">VALUE</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let code of iso_codes;let i=index">
+                              <td *ngIf="code != dateBaseValue">{{ code }}</td>
+                              <td *ngIf="code != dateBaseValue">{{ daterates[code] | currency:code | spacer }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+              </div>
+              <ng-template #infomsg>
+                <div style="height: 500px">
+                  <p class="primary text-center" style="margin-top:20%">Please select date and base <br>
+                    ISO code to see the results.
+                  </p>
+                </div>
+              </ng-template>
+          </div>
+    </mat-tab>
+</mat-tab-group>    

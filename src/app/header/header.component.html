@@ -1,0 +1,27 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+          <button mat-raised-button color="accent" 
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}"
+          >
+            {{ title | uppercase }}
+          </button>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li><button mat-button routerLink="/places" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <i class="material-icons">explore</i> PLACES
+        </button></li>
+        <li><button mat-button routerLink="/weather" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <i class="material-icons">cloud_circle</i> WEATHER
+        </button></li> -->
+        <!-- <li><button mat-button routerLink="/conversion" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <i class="material-icons">monetization_on</i> CONVERSION
+        </button></li> -->
+        <!-- <li><button mat-button routerLink="/blogs" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <i class="material-icons">face</i> BLOGS
+        </button></li> -->
+      </ul>
+    </div>
+  </nav>
